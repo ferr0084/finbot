@@ -1,0 +1,16 @@
+{
+  "name": "finbot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI-Powered Personal Financial Advisor — an opencode agent",
+  "scripts": {
+    "mcp": "bun run scripts/yahoo-finance-mcp/index.ts",
+    "test": "echo 'No tests yet'",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/bun": "^1.1.0"
+  }
+}

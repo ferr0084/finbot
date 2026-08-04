@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Financial Accounts",
+  "description": "User's financial accounts across institutions",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "Unique account identifier" },
+      "name": { "type": "string", "description": "Account display name" },
+      "type": {
+        "type": "string",
+        "enum": ["checking", "savings", "brokerage", "retirement", "credit", "loan", "hsa", "other"],
+        "description": "Account type"
+      },
+      "institution": { "type": "string", "description": "Financial institution name" },
+      "balance": { "type": "number", "description": "Current account balance" },
+      "currency": { "type": "string", "description": "Currency code (e.g. USD)", "default": "USD" },
+      "apy": { "type": "number", "description": "Annual percentage yield (for savings)", "exclusiveMinimum": 0 },
+      "interest_rate": { "type": "number", "description": "Interest rate (for loans)" },
+      "notes": { "type": "string", "description": "Optional notes" }
+    },
+    "required": ["id", "name", "type", "institution", "balance", "currency"]
+  }
+}

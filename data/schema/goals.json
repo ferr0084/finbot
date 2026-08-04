@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Financial Goals",
+  "description": "Financial goals and savings targets",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "Unique goal identifier" },
+      "name": { "type": "string", "description": "Goal name (e.g. Emergency Fund, House Down Payment)" },
+      "target": { "type": "number", "description": "Target amount to save", "exclusiveMinimum": 0 },
+      "current": { "type": "number", "description": "Current amount saved", "minimum": 0 },
+      "target_date": { "type": "string", "format": "date", "description": "Target completion date (ISO 8601)" },
+      "priority": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "description": "Goal priority"
+      },
+      "monthly_contribution": { "type": "number", "description": "Planned monthly contribution", "minimum": 0 },
+      "category": {
+        "type": "string",
+        "enum": ["emergency_fund", "debt_payment", "large_purchase", "retirement", "education", "travel", "other"],
+        "description": "Goal category"
+      },
+      "notes": { "type": "string", "description": "Optional notes" }
+    },
+    "required": ["id", "name", "target", "current", "priority"]
+  }
+}

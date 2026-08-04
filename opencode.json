@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "agent": {
+    "build": {
+      "mode": "primary",
+      "permission": {
+        "edit": "allow",
+        "bash": "allow"
+      }
+    },
+    "plan": {
+      "mode": "primary",
+      "permission": {
+        "edit": "deny",
+        "bash": "ask"
+      }
+    }
+  },
+  "mcp": {
+    "openbb": {
+      "type": "remote",
+      "url": "http://127.0.0.1:8001/mcp",
+      "enabled": true,
+      "timeout": 30000
+    },
+    "yahoo-finance": {
+      "type": "local",
+      "command": ["bun", "run", "scripts/yahoo-finance-mcp/index.ts"],
+      "enabled": true,
+      "timeout": 15000
+    }
+  },
+  "permission": {
+    "skill": {
+      "*": "allow"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Watch List",
+  "description": "Stocks and ETFs the user is monitoring for potential investment. Current prices are NOT stored here — they are fetched live from market data at query time.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "Unique watchlist entry identifier" },
+      "ticker": { "type": "string", "description": "Ticker symbol (e.g. AAPL, MSFT, VTI)" },
+      "added_date": { "type": "string", "format": "date", "description": "Date the ticker was added to the watchlist (ISO 8601)" },
+      "reason": { "type": "string", "description": "Why the user is watching this ticker", "examples": ["Earnings growth candidate", "Dividend aristocrat", "Sector play"] },
+      "target_buy_price": { "type": "number", "exclusiveMinimum": 0, "description": "Price at which the user would consider buying" },
+      "target_sell_price": { "type": "number", "exclusiveMinimum": 0, "description": "Price at which the user would consider selling (if already holding)" },
+      "notes": { "type": "string", "description": "Freeform user notes about this ticker" },
+      "priority": {
+        "type": "string",
+        "enum": ["high", "medium", "low"],
+        "description": "How closely the user wants to monitor this ticker"
+      },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Categorization tags for filtering",
+        "examples": [["tech", "growth"], ["dividend", "value"], ["etf"]]
+      }
+    },
+    "required": ["id", "ticker", "added_date"]
+  }
+}

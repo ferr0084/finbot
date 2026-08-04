@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Financial Transactions",
+  "description": "Income and expense entries",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "Unique transaction identifier" },
+      "date": { "type": "string", "format": "date", "description": "Transaction date (ISO 8601)" },
+      "amount": { "type": "number", "description": "Transaction amount. Negative for expenses, positive for income" },
+      "category": {
+        "type": "string",
+        "description": "Expense/income category",
+        "examples": ["food", "housing", "transportation", "utilities", "entertainment", "salary", "freelance", "healthcare", "education", "shopping", "travel", "other"]
+      },
+      "description": { "type": "string", "description": "Transaction description or merchant name" },
+      "account_id": { "type": "string", "description": "Reference to account ID in accounts.json" },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" },
+        "description": "Optional tags for categorization"
+      },
+      "recurring": {
+        "type": "boolean",
+        "description": "Whether this is a recurring transaction"
+      }
+    },
+    "required": ["id", "date", "amount", "category", "description", "account_id"]
+  }
+}

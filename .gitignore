@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+
+# Personal financial data — ship only the empty-data schemas
+data/*
+!data/schema/
+!data/schema/**
+
+# Personal analysis artifacts
+plans/
+scripts/nvda_*
+scripts/pltr_*
+scripts/gpiq_calc.py
+scripts/compute_hv.py
+
+# Local opencode tool deps
+.opencode/node_modules

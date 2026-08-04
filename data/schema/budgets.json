@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Budget Categories",
+  "description": "Budget categories with spending limits",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": { "type": "string", "description": "Unique budget category identifier" },
+      "category": { "type": "string", "description": "Category name matching transaction categories" },
+      "period": {
+        "type": "string",
+        "enum": ["monthly", "yearly", "weekly", "biweekly"],
+        "description": "Budget period"
+      },
+      "limit": { "type": "number", "description": "Spending limit for the period", "exclusiveMinimum": 0 },
+      "currency": { "type": "string", "description": "Currency code (e.g. USD)", "default": "USD" },
+      "rollover": {
+        "type": "boolean",
+        "description": "Whether unused budget rolls over to next period",
+        "default": false
+      },
+      "notes": { "type": "string", "description": "Optional notes" }
+    },
+    "required": ["id", "category", "period", "limit", "currency"]
+  }
+}
