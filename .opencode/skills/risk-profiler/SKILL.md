@@ -69,8 +69,9 @@ Max Drawdown: ~35-45%
 
 ## 4. Compare to Current Portfolio
 
-If holdings exist in `data/investments.json`:
+If holdings exist in `data/members/<id>/investments.json`:
 
+- Resolve ownership per account from `data/members/<id>/profile.json` / `accounts.json` (`self`/`spouse`/`joint`); evaluate allocation per person and household by default.
 - Calculate current allocation with `portfolio-utils_alloc`
 - Identify gaps between current and target
 - Use `portfolio-utils_rebalance` to generate a transition plan
@@ -105,7 +106,7 @@ If holdings exist in `data/investments.json`:
 
 ## 7. Save
 
-Offer to save the risk profile to `data/goals.json` or a new file `data/risk-profile.json`.
+Offer to save the risk profile to the owning member's `data/members/<id>/goals.json` or a new file `data/risk-profile.json`.
 
 ## Notes
 

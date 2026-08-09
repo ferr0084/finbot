@@ -15,10 +15,12 @@ Load this skill when the user asks about portfolio analysis, performance, divers
 
 ### 1. Gather Data
 
-Read `data/investments.json` and `data/accounts.json`. If either is missing or empty, ask the user to populate it.
+Read `data/members/<id>/investments.json` and `data/members/<id>/accounts.json` for each member, plus `data/members/household/accounts.json` for joint accounts. If any is missing or empty, ask the user to populate it. Read each member's `data/members/<id>/profile.json` to resolve account ownership.
+
+Ownership is derived: each investment inherits `owner` from its `account_id`'s account in the owning member's `accounts.json` (`self` / `spouse` / `joint`). Default to **per-person views** — self, spouse, and household — never silently merge `self` and `spouse`. Household totals = self + joint + spouse (a `joint` account counts toward the household but toward neither individual unless the user says so).
 
 For current prices, query OpenBB MCP:
-- Use `equity_price_quote` for each unique ticker, batching queries and caching results
+- Use `equity_price_quote` for each unique ticker, batching queries
 - For ETFs, use `etf_info` for NAV and premium/discount
 
 ### 2. Calculate Metrics
@@ -52,18 +54,25 @@ Use the custom tools:
 
 ### 5. Save
 
-If the user provides updated holdings or positions, write to `data/investments.json`.
+If the user provides updated holdings or positions, write to the owning member's `data/members/<id>/investments.json` (or `data/members/household/investments.json` for joint accounts).
 
 ## Presentation Format
 
-Present the portfolio summary as a table:
+Present the portfolio summary showing self, spouse, and household separately (per-person default per AGENTS rule g):
+
+| Metric | Self | Spouse | Household |
+|--------|------|--------|-----------|
+| Total Value | $XXX | $XXX | $XXX |
+| Total Cost Basis | $XXX | $XXX | $XXX |
+| Unrealized Gain/Loss | $X (X%) | $X (X%) | $X (X%) |
+| # of Holdings | XX | XX | XX |
+
+Then list each scope's allocation breakdown by asset class.
+
+Additional benchmark/metrics for any single scope:
 
 | Metric | Value |
 |--------|-------|
-| Total Value | $XXX,XXX |
-| Total Cost Basis | $XXX,XXX |
-| Unrealized Gain/Loss | $XX,XXX (X.X%) |
-| # of Holdings | XX |
 | TWR (1Y) | X.X% |
 | CAGR (Since Inception) | X.X% |
 | Dividend Yield | X.X% |

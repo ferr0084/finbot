@@ -16,7 +16,7 @@ Load this skill when the user asks about budgeting, spending, expenses, income, 
 
 ### 1. Gather Data
 
-Read `data/transactions.json` and `data/budgets.json` (plus `data/accounts.json` for context). If either file is missing, ask the user to create it. If there are no transactions, ask the user to:
+Read `data/members/<id>/transactions.json` and `data/members/<id>/budgets.json` for each member (plus `data/members/household/transactions.json`/`budgets.json` for joint cash flow, and the member/household `accounts.json` for context; read `data/members/<id>/profile.json` to honor account `owner` self/spouse/joint). Transactions carry no owner field, but owner is derivable from `account_id` → account `owner` (same pattern as investments) once accounts are populated. Default to household view unless the user specifies per-person. If a file is missing, ask the user to create it. If there are no transactions, ask the user to:
 - Manually enter recent transactions
 - Import from a CSV/OFX file
 - Start tracking going forward

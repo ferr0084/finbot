@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Member Profile",
+  "description": "One household member who owns accounts and investments. The ID ('self'/'spouse') is the stable key, referenced by the 'owner' field in the owning accounts. Stored at data/members/<id>/profile.json. 'joint' ownership is a value but NOT a member entry — joint accounts live in data/members/household/ which has no profile.json.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "enum": ["self", "spouse"],
+      "description": "Stable owner key referenced by accounts.json owner field"
+    },
+    "name": { "type": "string", "description": "Member's display name" },
+    "role": {
+      "type": "string",
+      "enum": ["self", "spouse"],
+      "description": "Household role"
+    },
+    "birth_date": { "type": "string", "format": "date", "description": "Date of birth (ISO 8601). Used for age-based retirement/Social Security math." },
+    "filing_status": {
+      "type": "string",
+      "enum": ["single", "mfj", "mfs", "hoh", "other"],
+      "description": "US federal tax filing status",
+      "default": "mfj"
+    },
+    "notes": { "type": "string", "description": "Optional notes" }
+  },
+  "required": ["id", "name", "role"]
+}

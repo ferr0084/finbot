@@ -14,7 +14,7 @@
       "description": { "type": "string", "description": "Optional human-readable name for custom/non-traded funds" },
       "asset_class": {
         "type": "string",
-        "enum": ["us_stock", "intl_stock", "emerging_stock", "bond", "real_estate", "commodity", "crypto", "cash", "alternative", "target_date", "other"],
+        "enum": ["us_stock", "intl_stock", "emerging_stock", "bond", "real_estate", "commodity", "crypto", "cash", "alternative", "target_date", "target_risk", "other"],
         "description": "Asset class for allocation analysis"
       },
       "sector": { "type": "string", "description": "Sector (for stocks)", "examples": ["technology", "healthcare", "finance", "energy"] },

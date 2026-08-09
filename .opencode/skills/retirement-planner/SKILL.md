@@ -16,7 +16,7 @@ Load this skill when the user asks about retirement planning, FIRE calculations,
 
 ### 1. Gather Data
 
-Read `data/goals.json` (existing retirement goals) and `data/investments.json` (portfolio). Ask for any missing inputs: current age or target retirement year, portfolio value, annual savings, desired retirement income or annual expenses (for FIRE), and account balances (401k/IRA/taxable).
+Read `data/members/<id>/goals.json` (existing retirement goals) and `data/members/<id>/investments.json` (portfolio) for each member, plus `data/members/household/` files for joint data. Read each member's `data/members/<id>/profile.json` (household members, ages, filing status). Resolve each account's owner (`self`/`spouse`/`joint`). Default to per-person views and use MFJ (married filing jointly) where a spouse profile has real (non-placeholder) data; otherwise use the member's own filing_status. Use the spouse's birth date for joint retirement date and combined Social Security estimates. Ask for any missing inputs: current age or target retirement year, portfolio value, annual savings, desired retirement income or annual expenses (for FIRE), and account balances (401k/IRA/taxable) by owner.
 
 ### 2. Scenarios
 
@@ -110,7 +110,7 @@ Show how changing one variable affects the outcome:
 
 ### 8. Save
 
-Offer to save the retirement plan to `data/goals.json`.
+Offer to save the retirement plan to the owning member's `data/members/<id>/goals.json` (or `data/members/household/goals.json` for a household goal).
 
 ## Edge Cases
 

@@ -22,16 +22,21 @@ In opencode, switch to the **finbot** agent (Tab or `@finbot`).
 
 ## Add your data
 
-Create these files in `data/` (schemas live in `data/schema/`):
+Schemas live in `data/schema/`. Personal data is organized per member:
 
-- `accounts.json` — brokerage/retirement/checking accounts
-- `investments.json` — holdings (cost basis only; prices are fetched live)
-- `transactions.json` — cash flow
-- `budgets.json` — spending budgets
-- `goals.json` — savings/retirement goals
-- `watchlist.json` — tickers you track
+```
+data/members/<id>/profile.json    member profile (id = self/spouse, the stable owner key)
+data/members/<id>/accounts.json   brokerage/retirement/checking accounts (each has owner)
+data/members/<id>/investments.json holdings (cost basis only; prices are fetched live)
+data/members/<id>/transactions.json cash flow
+data/members/<id>/budgets.json    spending budgets
+data/members/<id>/goals.json      savings/retirement goals
+data/members/<id>/watchlist.json  tickers you track
+```
 
-Ask FinBot to save a fact and it will write the file for you.
+`data/members/household/` is a member-style directory for joint records (accounts with `owner:"joint"`, plus household goals/watchlist/transactions/budgets). It has no `profile.json` — the household is not a person. Staged raw imports (e.g. broker CSV exports) go in `data/import/` and are not read for analysis.
+
+Ask FinBot to save a fact and it will write the member or household file for you.
 
 ## Market data providers
 

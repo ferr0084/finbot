@@ -13,7 +13,7 @@ Load this skill when the user wants to manage their watch list, check prices on 
 
 ## Data
 
-Entries are stored in `data/watchlist.json`. Each entry has:
+Entries are stored per member in `data/members/<id>/watchlist.json` (resolve `<id>` to the requesting member; default `self`). Each entry has:
 
 | Field | Required | Description |
 |-------|----------|-------------|
@@ -31,7 +31,7 @@ Entries are stored in `data/watchlist.json`. Each entry has:
 
 ### 1. View Watch List with Live Prices
 
-1. Read `data/watchlist.json`; if empty, suggest adding tickers.
+1. Read `data/members/<id>/watchlist.json`; if empty, suggest adding tickers.
 2. Query `equity_price_quote` per unique ticker for price, change %, day range, volume — batch all queries before presenting.
 3. Display a table:
 
@@ -49,24 +49,24 @@ Entries are stored in `data/watchlist.json`. Each entry has:
 1. Collect ticker plus optional reason, target prices, notes, priority, tags.
 2. Validate with `equity_price_quote` (returning data = valid).
 3. Warn if already on the watchlist.
-4. Generate `id` as highest existing numeric suffix + 1 (e.g. `wl_5`), append to `data/watchlist.json`.
+4. Generate `id` as highest existing numeric suffix + 1 (e.g. `wl_5`), append to `data/members/<id>/watchlist.json`.
 5. Confirm: "Added AAPL to your watchlist. Current price: $234.50. You'll be alerted when it approaches $220.00."
 
 ### 3. Remove Ticker from Watch List
 
 1. Identify entry by ticker or ID.
-2. Remove it from `data/watchlist.json`.
+2. Remove it from `data/members/<id>/watchlist.json`.
 3. Confirm: "Removed AAPL from your watchlist."
 
 ### 4. Update Watch List Entry
 
 1. Identify entry by ticker or ID.
-2. Update requested fields (target prices, notes, priority, tags, reason) in `data/watchlist.json`.
+2. Update requested fields (target prices, notes, priority, tags, reason) in `data/members/<id>/watchlist.json`.
 3. Confirm with the updated entry.
 
 ### 5. Scan Watch List for Catalysts
 
-1. Read all tickers from `data/watchlist.json`.
+1. Read all tickers from `data/members/<id>/watchlist.json`.
 2. Run `equity_price_quote` per ticker to find moves >3% daily.
 3. Run `news_company` across all tickers for recent headlines.
 4. For each ticker with a >3% move or notable news, run a targeted `websearch` for the catalyst.
@@ -106,7 +106,7 @@ Entries are stored in `data/watchlist.json`. Each entry has:
 If the user asks "what should I watch?" or wants ideas:
 
 1. Use `equity_discovery_gainers` or `equity_screener` to find interesting securities.
-2. Cross-reference `data/investments.json` — suggest tickers already held for monitoring.
+2. Cross-reference `data/members/<id>/investments.json` — suggest tickers already held for monitoring.
 3. Consider the user's risk profile if available (from risk-profiler).
 4. Present 3-5 suggestions with brief reasoning.
 

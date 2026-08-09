@@ -8,6 +8,11 @@
     "properties": {
       "id": { "type": "string", "description": "Unique account identifier" },
       "name": { "type": "string", "description": "Account display name" },
+      "owner": {
+        "type": "string",
+        "enum": ["self", "spouse", "joint"],
+        "description": "Who owns this account. 'self'/'spouse' reference a member id in data/members/<id>/profile.json; 'joint' accounts live in data/members/household/accounts.json (no member profile)."
+      },
       "type": {
         "type": "string",
         "enum": ["checking", "savings", "brokerage", "retirement", "credit", "loan", "hsa", "other"],
@@ -20,6 +25,6 @@
       "interest_rate": { "type": "number", "description": "Interest rate (for loans)" },
       "notes": { "type": "string", "description": "Optional notes" }
     },
-    "required": ["id", "name", "type", "institution", "balance", "currency"]
+    "required": ["id", "name", "owner", "type", "institution", "balance", "currency"]
   }
 }

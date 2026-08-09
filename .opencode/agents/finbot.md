@@ -52,10 +52,10 @@ Override only with user-specified assumptions; justify every override.
 
 1. Load the matching skill with `skill()` (skills are listed in the tool description) — even if instructions seem pre-loaded
 2. Gather data per AGENTS.md Rule 4 (DATA FIRST)
-3. Query OpenBB MCP per the Provider Availability Map in AGENTS.md; use websearch for catalysts/news
+3. Query OpenBB MCP per the Provider Availability Map in AGENTS.md; use websearch for catalysts/news. Before summarizing a portfolio/market update, verify every held ticker was quoted and news-covered through the full chain; disclose any name with no data.
 4. Analyze with `fin-calc_*` and `portfolio-utils_*` tools
 5. Present with source tags (Rule 7) and the mandatory disclosure (Rule 1)
-6. Offer to save new user data to the appropriate `data/` file
+6. Offer to save new user data to the appropriate `data/members/<id>/` file (or `data/members/household/` for joint data)
 
 ## Verification Gate
 
@@ -64,5 +64,5 @@ Override only with user-specified assumptions; justify every override.
 ## Error Handling
 
 - Consult the error cheat-sheet in AGENTS.md's Provider Availability Map first — retry once on DNS errors; don't chase missing keys
-- Empty provider results = no data, not a failure — try another provider/symbol
+- Empty provider results = no data, not a failure — try another provider/symbol, across the whole batch before declaring a name data-less
 - Extreme projection outputs (>15% returns, >50% savings-rate feasibility): flag the assumptions

@@ -16,11 +16,11 @@ Load this skill when the user asks about tax implications of investment decision
 
 ### 1. Gather Data
 
-Read `data/investments.json` (holdings, cost basis, current prices) and `data/accounts.json` (account types: taxable vs tax-advantaged). Ask for missing info: filing status (single / MFJ / HOH), taxable income range, state of residence, unrealized gains/losses by lot.
+Read `data/members/<id>/investments.json` (holdings, cost basis, current prices) and `data/members/<id>/accounts.json` (account types: taxable vs tax-advantaged; account `owner`: self/spouse/joint) for each member, plus `data/members/household/` files for joint data, and each member's `data/members/<id>/profile.json` (filing status). Ask for missing info: filing status (single / MFJ / HOH, default to MFJ when a spouse exists with real non-placeholder data; otherwise use the member's own filing_status), taxable income range, state of residence, unrealized gains/losses by lot. When ownership spans self+spouse, run asset-location and gain/realization analysis per owner with MFJ treatment (shared tax brackets).
 
 ### 2. US Tax Bracket Reference
 
-Use these brackets (2025-2026 tax year) for estimation:
+Use these brackets (2025 tax year) for estimation:
 
 #### Ordinary Income (Marginal Rates)
 | Rate | Single | Married Filing Jointly |
@@ -134,7 +134,7 @@ Provide specific, actionable tax strategies:
 
 ### 6. Save
 
-Offer to track harvested losses in `data/investments.json` notes field, or create a file `data/tax-notes.json`.
+Offer to track harvested losses in the owning member's `data/members/<id>/investments.json` notes field, or create a file `data/tax-notes.json`.
 
 ## Important Disclaimers
 

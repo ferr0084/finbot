@@ -41,12 +41,20 @@ sound reasoning, and consistency with the user's actual data. Do NOT write files
 <paste the draft>
 
 User data to cross-check (read these yourself):
-- /Users/jeremy/work/finbot/data/accounts.json
-- /Users/jeremy/work/finbot/data/investments.json
-- /Users/jeremy/work/finbot/data/budgets.json
-- /Users/jeremy/work/finbot/data/goals.json
-- /Users/jeremy/work/finbot/data/transactions.json
-- /Users/jeremy/work/finbot/data/watchlist.json
+- /Users/jeremy/work/finbot/data/members/self/profile.json
+- /Users/jeremy/work/finbot/data/members/self/accounts.json
+- /Users/jeremy/work/finbot/data/members/self/investments.json
+- /Users/jeremy/work/finbot/data/members/self/transactions.json
+- /Users/jeremy/work/finbot/data/members/self/budgets.json
+- /Users/jeremy/work/finbot/data/members/self/goals.json
+- /Users/jeremy/work/finbot/data/members/self/watchlist.json
+- /Users/jeremy/work/finbot/data/members/spouse/profile.json
+- /Users/jeremy/work/finbot/data/members/spouse/accounts.json
+- /Users/jeremy/work/finbot/data/members/spouse/investments.json
+- /Users/jeremy/work/finbot/data/members/household/accounts.json
+- ... plus any other data/members/* files present (household has no profile.json).
+
+Verify ownership consistency: every account in each member's accounts.json has owner self/spouse/joint matching its directory (household dir → owner:"joint"), investment account_ids resolve to existing accounts in the same directory, and per-person vs household figures are not silently merged.
 
 Assumptions used: <state every assumption: return rates, inflation, valuation basis, fund equity content, etc.>
 
