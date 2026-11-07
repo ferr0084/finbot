@@ -55,7 +55,7 @@ Ask FinBot to save a fact and it will write the member or household file for you
 | `yf_correlation` | Pairwise return correlation matrix + annualized vol |
 | `yf_dividends` | Ex-dates, TTM total/yield, ex-day gap and recovery behavior |
 
-Recurring analysis uses these generic tools instead of per-ticker scripts. Responses are cached in-process (quotes 15s, history 60s, fundamentals 1h, news 5min). No API keys required.
+Recurring analysis uses these generic tools instead of per-ticker scripts. Responses are cached in-process (quotes 15s, history 60s, fundamentals 1h, news 5min). No API keys required. The server is registered with a 15s catalog timeout and a 120s execution timeout so a 5-year `ta` pull does not trip the default.
 
 **Calc tools (plugin).** `.opencode/plugins/fin-tools/` registers `fin-calc_*` (NPV, CAGR, Sharpe, PMT, inflation, …), `portfolio-utils_*` (allocation, diversification, returns), and `fin-data_snapshot` — a price-free digest of every member's accounts and holdings (it returns `prices_required`; pass a batched `yf_quote` price map back to get valuations).
 
@@ -66,6 +66,7 @@ Macro series, analyst targets, ETF expense ratios/holdings, and options data are
 ```sh
 bun run test        # ta fixture regression against scripts/__fixtures__/PL-2026-11-05.json
 bun run typecheck   # tsc --noEmit across plugins and scripts
+bun run --cwd scripts/yahoo-finance-mcp typecheck  # MCP standalone typecheck
 bun run mcp         # run the yahoo-finance MCP standalone (stdio)
 python3 scripts/validate_data.py  # check the data/ layout and cross-references
 ```

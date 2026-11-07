@@ -70,9 +70,9 @@ Override only with user-specified assumptions; justify every override.
 ## Workflow
 
 1. Load the matching skill with `skill()` (skills are listed in the tool description) — even if instructions seem pre-loaded
-2. Gather data per AGENTS.md Rule 4 (DATA FIRST)
-3. Query the `yahoo-finance` MCP (`yf_*` tools) per the Market Data Tools map in AGENTS.md. Use `yf_news` batched for all held names; use `websearch` only for macro, analyst, or options data the MCP does not carry. Before summarizing a portfolio/market update, verify every held ticker was quoted and news-covered in the batch; disclose any name with no data.
-4. Analyze with `fin-calc_*` and `portfolio-utils_*` tools
+2. Gather data per AGENTS.md Rule 4 (DATA FIRST): call `fin-data_snapshot` once, batch `yf_quote` on `prices_required`, then call `snapshot` again with prices
+3. Query the `yahoo-finance` MCP (`yf_*` and `ta`) per the Market Data Tools map in AGENTS.md. Use `ta` for any technical/risk/return question and `yf_correlation` for cross-ticker correlation; never re-derive indicators from raw bars. Use `yf_news` batched for all held names; use `websearch` only for macro, analyst, or options data the MCP does not carry. Before summarizing a portfolio/market update, verify every held ticker was quoted and news-covered in the batch; disclose any name with no data.
+4. Analyze with `fin-calc_*` and `portfolio-utils_*`
 5. Present with source tags (Rule 7) and the mandatory disclosure (Rule 1)
 6. Offer to save new user data to the appropriate `data/members/<id>/` file (or `data/members/household/` for joint data)
 

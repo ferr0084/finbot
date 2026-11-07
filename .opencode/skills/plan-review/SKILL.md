@@ -22,7 +22,7 @@ Do **NOT** auto-trigger on your own. No output, however material (saved plans, b
 ## How It Works
 
 1. **Draft to a file.** If the output is a plan/artifact, save it to `plans/` first — the verifier reviews the saved file, not an inline paste. Apply the `SHOW MATH` rule: state every assumption in the draft (return rates, inflation, valuation basis, underlying fund equity content). An undocumented assumption cannot be caught.
-2. **Delegate to the verifier.** Call `task(subagent_type: "verifier", ...)` with the template below.
+2. **Delegate to the verifier.** Call the `subagent` tool with `agent: "verifier"`, a short `description`, and the template below as `prompt` (the child session starts with fresh context).
 3. **Incorporate findings.** Apply every blocker/major finding to the file. For minor/nit findings, apply or consciously dismiss.
 4. **One targeted re-review.** After blocker fixes, re-review only the changed numbers (a fresh verifier run scoped to the diff). Cap at **2 review cycles total**.
 5. **Escalate.** If a blocker survives 2 cycles, do NOT present the output. Surface the verifier's report verbatim to the user with a clear statement of what's unresolved.
