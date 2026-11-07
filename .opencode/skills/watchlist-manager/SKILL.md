@@ -32,7 +32,7 @@ Entries are stored per member in `data/members/<id>/watchlist.json` (resolve `<i
 ### 1. View Watch List with Live Prices
 
 1. Read `data/members/<id>/watchlist.json`; if empty, suggest adding tickers.
-2. Query `equity_price_quote` per unique ticker for price, change %, day range, volume — batch all queries before presenting.
+2. Query `yf_quote` with all tickers in one batched call for price, change %, day range, volume.
 3. Display a table:
 
 ```
@@ -47,7 +47,7 @@ Entries are stored per member in `data/members/<id>/watchlist.json` (resolve `<i
 ### 2. Add Ticker to Watch List
 
 1. Collect ticker plus optional reason, target prices, notes, priority, tags.
-2. Validate with `equity_price_quote` (returning data = valid).
+2. Validate with `yf_quote` (returning data = valid).
 3. Warn if already on the watchlist.
 4. Generate `id` as highest existing numeric suffix + 1 (e.g. `wl_5`), append to `data/members/<id>/watchlist.json`.
 5. Confirm: "Added AAPL to your watchlist. Current price: $234.50. You'll be alerted when it approaches $220.00."
@@ -67,8 +67,8 @@ Entries are stored per member in `data/members/<id>/watchlist.json` (resolve `<i
 ### 5. Scan Watch List for Catalysts
 
 1. Read all tickers from `data/members/<id>/watchlist.json`.
-2. Run `equity_price_quote` per ticker to find moves >3% daily.
-3. Run `news_company` across all tickers for recent headlines.
+2. Run `yf_quote` across all tickers to find moves >3% daily.
+3. Run `yf_news` across all tickers for recent headlines.
 4. For each ticker with a >3% move or notable news, run a targeted `websearch` for the catalyst.
 5. Present findings and highlight tickers near their targets:
 
@@ -105,7 +105,7 @@ Entries are stored per member in `data/members/<id>/watchlist.json` (resolve `<i
 
 If the user asks "what should I watch?" or wants ideas:
 
-1. Use `equity_discovery_gainers` or `equity_screener` to find interesting securities.
+1. Use `yf_search` plus `websearch` (screeners, sector news) to find interesting securities.
 2. Cross-reference `data/members/<id>/investments.json` — suggest tickers already held for monitoring.
 3. Consider the user's risk profile if available (from risk-profiler).
 4. Present 3-5 suggestions with brief reasoning.
@@ -117,6 +117,6 @@ Use a table with columns appropriate to the action. Always show current prices w
 ## Important Notes
 
 - Current prices are fetched live — do not cache them across sessions.
-- Batch OpenBB queries where possible to minimize latency.
-- Always validate a ticker with `equity_price_quote` before adding.
+- Batch `yf_quote` / `yf_news` calls where possible to minimize latency.
+- Always validate a ticker with `yf_quote` before adding.
 - Target prices are user-defined, not financial advice.

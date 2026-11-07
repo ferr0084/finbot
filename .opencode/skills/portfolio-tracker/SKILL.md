@@ -17,11 +17,13 @@ Load this skill when the user asks about portfolio analysis, performance, divers
 
 Read `data/members/<id>/investments.json` and `data/members/<id>/accounts.json` for each member, plus `data/members/household/accounts.json` for joint accounts. If any is missing or empty, ask the user to populate it. Read each member's `data/members/<id>/profile.json` to resolve account ownership.
 
+Prefer `fin-data_snapshot` for the first pass: it returns accounts, holdings, owner resolution, and `prices_required` in one call. Then batch `yf_quote` on those tickers and call `snapshot` again with `prices` for valuations and unrealized P&L. Fall back to reading the JSON files directly only when you need a field the digest omits.
+
 Ownership is derived: each investment inherits `owner` from its `account_id`'s account in the owning member's `accounts.json` (`self` / `spouse` / `joint`). Default to **per-person views** — self, spouse, and household — never silently merge `self` and `spouse`. Household totals = self + joint + spouse (a `joint` account counts toward the household but toward neither individual unless the user says so).
 
-For current prices, query OpenBB MCP:
-- Use `equity_price_quote` for each unique ticker, batching queries
-- For ETFs, use `etf_info` for NAV and premium/discount
+For current prices, query the `yahoo-finance` MCP:
+- Use `yf_quote` for each unique ticker, batching all tickers in one call
+- For ETFs, `yf_quote` gives price/volume; get NAV premium/discount and holdings via `websearch`
 
 ### 2. Calculate Metrics
 
@@ -32,6 +34,8 @@ Use the custom tools:
 - `portfolio-utils_returns` — Time-weighted and money-weighted returns
 - `fin-calc_cagr` — CAGR for portfolio and individual holdings
 - `fin-calc_inflation` — Inflation-adjusted (real) returns
+- `yf_correlation` — Pairwise return correlation and annualized vol across held tickers; use for the concentration/diversification read instead of eyeballing sectors
+- `ta` — Per-holding returns, drawdown, and volatility in one call per ticker
 
 ### 3. Analyze
 

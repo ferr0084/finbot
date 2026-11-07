@@ -6,7 +6,7 @@
   "description": "AI-Powered Personal Financial Advisor — an opencode agent",
   "scripts": {
     "mcp": "bun run scripts/yahoo-finance-mcp/index.ts",
-    "test": "echo 'No tests yet'",
+    "test": "bun run scripts/ta-fixture-test.ts",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
