@@ -83,7 +83,7 @@ Config and plugins hot-reload; MCP server code needs a config change (or restart
 - `scripts/yahoo-finance-mcp/` — bundled market-data MCP (`index.ts` tools, `ta.ts` indicators)
 - `scripts/ta-fixture-test.ts` — indicator regression test
 - `scripts/validate_data.py` — validates the `data/` layout and account/investment cross-references
-- `plans/` — saved analysis artifacts (gitignored)
+- `plans/` — saved analysis artifacts (gitignored); per-ticker research data files live here as `plans/<TICKER>.md` (no date in filename, `Last updated:` inside)
 
 ## Notes
 

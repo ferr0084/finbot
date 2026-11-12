@@ -1,16 +1,22 @@
 # [TICKER] — [Company Name] Deep-Dive Research Note
 
 <!--
-  Fillable skeleton for single-ticker deep dives (research-only, no rec).
-  Copy to plans/<ticker>-deep-dive-<YYYY-MM-DD>.md, fill every [PLACEHOLDER],
-  delete these HTML comments, source-tag every key number per AGENTS.md Rule 7,
-  then run the verification gate (Rule 8) before saving ONLY if the user requested a review.
-  See §4.5 in SKILL.md.
+  Fillable skeleton for per-ticker investment data files (research-only, no rec).
+  SCHEMA: every researched ticker gets ONE persistent file: plans/<TICKER>.md (no date in name).
+  Workflow:
+    1. Before researching a ticker, read plans/<TICKER>.md if it exists — use it as the baseline.
+    2. Copy this skeleton to plans/<TICKER>.md only if no file exists yet.
+    3. Fill every [PLACEHOLDER], delete these HTML comments, source-tag every key number per AGENTS.md Rule 7.
+    4. Update in place on each research pass: refresh data, append new quarters/events, bump "Last updated",
+       and add a "> ⚠️ Correction note:" in the relevant section when a figure changes (do not silently fix).
+    5. Run the verification gate (Rule 8) before saving ONLY if the user requested a review.
+  See §4.5 in SKILL.md and AGENTS.md Critical Rule 4.
 -->
 
-**Prepared:** [YYYY-MM-DD] (mid-session snapshot [HH:MM] ET; latest intraday bar [HH:MM] ET)
-**Status:** [Watchlist entry `wl_N` / HELD N sh @ $X.XX / NOT held] · [position context, e.g., added to watchlist on date / unrealized P&L if held]
-**Nature:** Research note for reference. Contains **no buy/sell/rebalance recommendation.**
+**Last updated:** [YYYY-MM-DD] (mid-session snapshot [HH:MM] ET; latest intraday bar [HH:MM] ET)
+**Created:** [YYYY-MM-DD]
+**Status:** [Watchlist entry `wl_N` / HELD N sh @ $X.XX / NOT held] · [position context, e.g., added on date / unrealized P&L if held]
+**Nature:** Research data file for reference. Contains **no buy/sell/rebalance recommendation.**
 
 ---
 

@@ -8,7 +8,7 @@ color: "#22c55e"
 permissions:
   - action: "*"
     resource: "*"
-    effect: ask
+    effect: allow
   - action: edit
     resource: "*"
     effect: ask
@@ -75,6 +75,7 @@ Override only with user-specified assumptions; justify every override.
 4. Analyze with `fin-calc_*` and `portfolio-utils_*`
 5. Present with source tags (Rule 7) and the mandatory disclosure (Rule 1)
 6. Offer to save new user data to the appropriate `data/members/<id>/` file (or `data/members/household/` for joint data)
+7. For single-ticker research: read `plans/<TICKER>.md` first if it exists (baseline), then update it in place with current data — bump `Last updated`, append new quarters/events, add correction notes for changed figures
 
 ## Verification Gate
 

@@ -75,14 +75,22 @@ Add this after the standard research. There is no options-chain endpoint in the 
 - Benchmark against relevant indices (S&P 500 for stocks, AGG for bonds, sector ETF for sector plays). Use `ta` for the subject's returns and `yf_correlation` with `^GSPC` (or the sector ETF) for the correlation matrix; add `yf_quote` for the benchmark price.
 - Present a comparison table of the security vs 1-2 benchmarks
 
-### 4.5 Deep-Dive Research Note (saved to `plans/`)
+### 4.5 Per-Ticker Research Data File (saved to `plans/<TICKER>.md`)
 
-For single-ticker deep dives (research-only, no rec), save a note to `plans/<ticker>-deep-dive-<YYYY-MM-DD>.md`. **Start from the fillable skeleton** at `.opencode/skills/market-research/templates/deep-dive-note.md` — copy it to `plans/`, fill the placeholders, delete the HTML comments. The structure below documents what the skeleton contains (modeled on `plans/nvda-deep-dive-2026-07-31.md`, which resolved what worked; do not re-derive the structure each time).
+For single-ticker deep dives (research-only, no rec), maintain ONE persistent data file per ticker at `plans/<TICKER>.md` — **no date in the filename**. **Start from the fillable skeleton** at `.opencode/skills/market-research/templates/deep-dive-note.md` — copy it to `plans/<TICKER>.md` only if no file exists yet; otherwise **read the existing file first** and update it in place. Fill the placeholders, delete the HTML comments. The structure below documents what the skeleton contains (modeled on `plans/nvda-deep-dive-2026-07-31.md`, which resolved what worked; do not re-derive the structure each time).
+
+**Workflow (read-first, then update):**
+1. Before researching a ticker, `read plans/<TICKER>.md` if it exists — use it as the baseline (prior data, prior quarters, prior assessment).
+2. If it does not exist, create it from the skeleton.
+3. Refresh every section with current MCP/search data; **append** new quarters, earnings, and events rather than deleting history.
+4. Bump the `Last updated:` line to the current snapshot date/time.
+5. When a figure changes across passes, add a `> ⚠️ Correction note:` in the relevant section documenting what changed and why — do not silently fix.
 
 **Header block** (frontmatter-style):
-- `Prepared:` date + time snapshot + latest intraday bar used
+- `Last updated:` date + time snapshot + latest intraday bar used
+- `Created:` date the file was first created
 - `Status:` held-in-portfolio or watchlist status; explicitly state if position owned
-- `Nature:` research note for reference — **no buy/sell/rebalance recommendation**
+- `Nature:` research data file for reference — **no buy/sell/rebalance recommendation**
 - **Anchor policy** line: state the price used for valuation math vs. the price used for returns/technicals (they may differ by intraday bar)
 
 **Body sections:**
@@ -102,7 +110,8 @@ For single-ticker deep dives (research-only, no rec), save a note to `plans/<tic
 - Source-tag every key quantitative point per AGENTS.md Rule 7.
 - **Correction-notes convention**: if a figure changes across review cycles (e.g., wrong fiscal quarter, wrong anchor date), keep a `> ⚠️ Correction note:` in the relevant section documenting what changed and why — do not silently fix.
 - Do not extrapolate historical CAGRs forward; house planning defaults remain 7% nominal / 4% real (Rule 2).
-- Save to `plans/` directly; the verification gate (Rule 8) runs **only if the user requests a review** — then load `plan-review`, delegate to the `verifier` subagent, apply findings, disclose cycles.
+- Save/update to `plans/<TICKER>.md` in place; the verification gate (Rule 8) runs **only if the user requests a review** — then load `plan-review`, delegate to the `verifier` subagent, apply findings, disclose cycles.
+- **Refresh log:** in §9 (Method & Verification Notes), record what was added/changed this pass (new quarter, refreshed prices, corrected figure) so staleness is visible.
 - End with the mandatory disclosure (Rule 1).
 
 ### 5. Present
