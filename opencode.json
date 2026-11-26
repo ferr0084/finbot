@@ -9,11 +9,11 @@
     }
   },
   "permissions": [
-    {
-      "action": "skill",
-      "resource": "*",
-      "effect": "allow"
-    }
+    { "action": "skill", "resource": "*", "effect": "allow" },
+    { "action": "tool", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "bun run scripts/*", "effect": "allow" },
+    { "action": "shell", "resource": "python3 scripts/*", "effect": "allow" },
+    { "action": "shell", "resource": "node scripts/*", "effect": "allow" }
   ],
   "websearch": {
     "provider": "tinyfish"
@@ -23,6 +23,15 @@
       "yahoo-finance": {
         "type": "local",
         "command": ["bun", "run", "scripts/yahoo-finance-mcp/index.ts"],
+        "disabled": false,
+        "timeout": {
+          "catalog": 15000,
+          "execution": 120000
+        }
+      },
+      "fin-data": {
+        "type": "local",
+        "command": ["bun", "run", "scripts/yahoo-finance-mcp/fin-data.ts"],
         "disabled": false,
         "timeout": {
           "catalog": 15000,

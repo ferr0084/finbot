@@ -54,12 +54,17 @@ Ask FinBot to save a fact and it will write the member or household file for you
 | `ta` | Trend, RSI/MACD, period returns (price and total), ATR/HV/drawdown, volume profile, S/R + Fibonacci |
 | `yf_correlation` | Pairwise return correlation matrix + annualized vol |
 | `yf_dividends` | Ex-dates, TTM total/yield, ex-day gap and recovery behavior |
+| `yf_options` | Options chain: metadata or one expiration's calls/puts with IV (decimal + pct), OI, volume, bid/ask, filters |
+| `yf_option_summary` | One expiration summary: avg IV, OI/volume totals, put/call ratios, max pain |
+| `yf_earnings` | Earnings dates, surprise history, estimate trend |
+| `yf_recommendations` | Analyst recommendation trend snapshot |
+| `yf_financials` | Financial statements (financials/cash-flow/balance-sheet) |
 
 Recurring analysis uses these generic tools instead of per-ticker scripts. Responses are cached in-process (quotes 15s, history 60s, fundamentals 1h, news 5min). No API keys required. The server is registered with a 15s catalog timeout and a 120s execution timeout so a 5-year `ta` pull does not trip the default.
 
-**Calc tools (plugin).** `.opencode/plugins/fin-tools/` registers `fin-calc_*` (NPV, CAGR, Sharpe, PMT, inflation, …), `portfolio-utils_*` (allocation, diversification, returns), and `fin-data_snapshot` — a price-free digest of every member's accounts and holdings (it returns `prices_required`; pass a batched `yf_quote` price map back to get valuations).
+**Calc tools (plugin).** `.opencode/plugins/fin-tools/` registers `fin-calc_*` (NPV, CAGR, Sharpe, PMT, inflation, …) and `portfolio-utils_*` (allocation, diversification, returns). **Data tool (MCP).** `fin-data_snapshot` (served by the `fin-data` MCP) is a price-free digest of every member's accounts and holdings (it returns `prices_required`; pass a batched `yf_quote` price map back to get valuations).
 
-Macro series, analyst targets, ETF expense ratios/holdings, and options data are not in the MCP — the finbot agent fetches those via web search and tags them `[search]`. Tool details live in the Market Data Tools section of `AGENTS.md`.
+Macro series, analyst targets, ETF expense ratios/holdings, greeks, and IV rank are not in the MCP — the finbot agent fetches those via web search and tags them `[search]`. Options chains, IV, and open interest come from `yf_options`. Tool details live in the Market Data Tools section of `AGENTS.md`.
 
 ## Development
 
